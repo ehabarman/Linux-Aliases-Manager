@@ -2,8 +2,8 @@
 import sys
 import argcomplete
 
-# from util.constants import *
-from manager.CLI.manager_parser import setup_parser
+from CLI.manager_parser import setup_parser
+from util.json_helper import load_json_from_file, save_json_to_file
 
 
 def main(argv):
@@ -11,9 +11,16 @@ def main(argv):
     args = parser.parse_args(argv)
     argcomplete.autocomplete(parser)
 
+    if args.operation is None:
+        print("You need to choose an operation")
+    else:
+        if hasattr(args, 'func'):
+            load_json_from_file()
+            args.func(args)
+            save_json_to_file()
+        else:
+            parser.print_help()
+
 
 if __name__ == "__main__":
     main(sys.argv[1:])
-
-
-

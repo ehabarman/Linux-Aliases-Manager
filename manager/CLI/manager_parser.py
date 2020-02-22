@@ -1,7 +1,9 @@
 import argparse
 
 __version__ = "0.0.1"
-__manager_actions__ = ["list", "create", "edit", "remove", "set", "import", "export"]
+__manager_operations__ = ["list", "create", "edit", "remove", "set", "import", "export"]
+
+from operations.list import list_aliases
 
 
 def setup_parser():
@@ -22,10 +24,10 @@ def add_subparsers(subparsers):
 
 
 def add_list_aliases_action(subparsers):
-    actions = ["active", "inactive", "all"]
+    states = ["active", "inactive", "all"]
     parser = subparsers.add_parser("list", help="list aliases")
-    parser.add_argument("action", help="what aliases to show, options " + str(actions))
-    # parser.set_defaults(func="active")
+    parser.add_argument("aliases-state", choices=states, help="what aliases to show, options " + str(states))
+    parser.set_defaults(func=list_aliases)
 
 
 def add_create_alias_action(subparsers):
