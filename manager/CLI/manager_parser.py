@@ -1,7 +1,7 @@
 import argparse
 
 __version__ = "0.0.1"
-__manager_operations__ = ["list", "create", "edit", "remove", "set", "import", "export"]
+__manager_operations__ = ["list", "show", "create", "edit", "remove", "set", "import", "export", "delete"]
 
 from operations.list import list_aliases
 
