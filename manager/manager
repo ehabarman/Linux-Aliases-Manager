@@ -15,9 +15,7 @@ def main(argv):
         print("You need to choose an operation")
     else:
         if hasattr(args, 'func'):
-            load_json_from_file()
             args.func(args)
-            save_json_to_file()
         else:
             parser.print_help()
 

@@ -1,1 +1,9 @@
 DATA_DIR_PATH = "./data/"
+JSON_FORMAT = "json"
+TABLE_FORMAT = "table"
+NAME_COL = "name"
+COMMAND_COL = "command"
+DESCRIPTION_COL = "description"
+TAGS_COL = "tags"
+IS_ACTIVE_COL = "Is active"
+ALIAS_COLUMNS = [NAME_COL, COMMAND_COL, DESCRIPTION_COL, TAGS_COL, IS_ACTIVE_COL]
