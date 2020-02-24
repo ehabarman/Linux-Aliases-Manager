@@ -1,12 +1,12 @@
 import json
 from json import JSONDecodeError
-from util.files_helper import join_file_and_path, path_exits
+from util.files_helper import join_file_and_path, path_exists
 
 
 def load_json_from_file(json_file_name, json_file_path):
     """ Method to read json file content """
     file = join_file_and_path(json_file_name, json_file_path)
-    if path_exits(file):
+    if path_exists(file):
         try:
             with open(file) as json_file:
                 return json.load(json_file)
@@ -20,9 +20,9 @@ def load_json_from_file(json_file_name, json_file_path):
 
 def save_json_to_file(data, json_file_name, json_file_path, overwrite=True):
     """Method that will write json data to a file"""
-    if path_exits(json_file_path):
+    if path_exists(json_file_path):
         file = join_file_and_path(json_file_name, json_file_path)
-        if overwrite is False and path_exits(file):
+        if overwrite is False and path_exists(file):
             raise Exception("File %s exits and overwrite option is False" % file)
         else:
             try:

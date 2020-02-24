@@ -1,3 +1,3 @@
-def delete_aliases(args):
+def export_set(args):
     """TODO: implement this"""
     pass

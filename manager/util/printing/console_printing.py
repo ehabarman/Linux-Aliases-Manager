@@ -22,5 +22,4 @@ def table_printing(data, *headers):
 
 
 def json_printing(data):
-    print(data)
     print(json.dumps(data, indent=4, sort_keys=True))

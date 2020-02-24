@@ -1,11 +1,9 @@
-import sys
-
-from util.console_printing import table_printing, json_printing
+from util.printing.console_printing import table_printing, json_printing
 from util.constants import DATA_DIR_PATH, JSON_FORMAT, TABLE_FORMAT, ALIAS_COLUMNS
 from util.json_helper import load_json_from_file
 
 
-def show_aliases(args):
+def show_set(args):
     name = args.name
     columns = args.columns
     view_format = args.format
