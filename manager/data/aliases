@@ -4,6 +4,6 @@
       "command" : "sudo updatedb; mlocate",
       "description" : "locate all files with the given pattern inside their paths",
       "tags" : "find, locate, sudo",
-      "active" : false
+      "is_active" : false
     }
 ]

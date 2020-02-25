@@ -18,7 +18,7 @@ def execute_shell_commands(commands, continue_on_failure=False):
         commands = [commands]
 
     for command in commands:
-        stdout, stderr, rc = execute_run_shell_command(command)
+        stdout, stderr, rc = execute_shell_command(command)
         output.append(stdout)
         error.append(stderr)
         return_code.append(rc)

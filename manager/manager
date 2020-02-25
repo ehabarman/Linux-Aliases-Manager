@@ -2,7 +2,7 @@
 import sys
 import argcomplete
 
-from CLI.manager_parser import setup_parser
+from cli.cli_manager import setup_parser
 
 
 def main(argv):

@@ -1,10 +1,13 @@
 from operations.set.list import list_sets
 from util.constants import DATA_DIR_PATH
-from util.files_helper import path_exists
-from util.json_helper import save_json_to_file
+from util.helpers.files_helper import path_exists
+from util.helpers.json_helper import save_json_to_file
 
 
 def create_set(args):
+    """
+        Creates a new aliases set
+    """
     name = args.name
     if path_exists(DATA_DIR_PATH + name) is True:
         print("\"%s\" set already exists" % name)

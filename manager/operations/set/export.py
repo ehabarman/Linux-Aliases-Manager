@@ -1,3 +1,8 @@
 def export_set(args):
-    """TODO: implement this"""
+    destination = args.destination
+    format = args.format
+    name = args.name
+    print(destination)
+    print(format)
+    print(name)
     pass
