@@ -1,3 +1,4 @@
+import re
 from os import listdir
 from pathlib import Path
 import os
@@ -26,3 +27,11 @@ def get_files_in_path(path):
         return [file for file in listdir(path) if isfile(join(path, file))]
     else:
         return []
+
+
+def separate_file_from_path(value):
+    file = re.search(r"(?<=\/)[^\/\\]+$", value)
+    path = re.search(r".*\/(?=.*)", value)
+    file = file.group(0) if file is not None else ""
+    path = path.group(0) if path is not None else ""
+    return path, file
