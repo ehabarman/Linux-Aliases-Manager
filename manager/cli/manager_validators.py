@@ -19,7 +19,6 @@ class ValidatePath(argparse.Action):
 
     def __call__(self, parser, namespace, value, option_string=None):
         """Check path validity and reformat it if possible"""
-        print(self.dest)
         # Make relative path
         if value.startswith("/") is False:
             current_directory = os.getcwdb().decode('UTF-8')
@@ -35,7 +34,28 @@ class ValidatePath(argparse.Action):
             if file == "":
                 raise argparse.ArgumentError(None, "Source must be a file")
             valid_path = valid_path and path_exists(path+file)
+
         if not valid_path:
             raise argparse.ArgumentError(None, f"The {self.dest} does not exist: {value}")
 
-        setattr(namespace, self.dest, valid_path)
+        setattr(namespace, self.dest, path+file)
+
+
+class ValidateNotEmpty(argparse.Action):
+    """Check if user passing an empty parameters"""
+
+    def __init__(self, option_strings, dest, **kwargs):
+        """Ensures only export and import operation using this action"""
+        super(ValidateNotEmpty, self).__init__(option_strings, dest, **kwargs)
+
+    def __call__(self, parser, namespace, value, option_string=None):
+        """Check if value is empty"""
+        is_list = type(value) is list
+        if is_list is False:
+            value = [value]
+        value = list(filter(lambda x: x.strip() != "", value))
+
+        if not value:
+            raise argparse.ArgumentError(None, f"You need to pass non-empty value to {self.dest}")
+
+        setattr(namespace, self.dest, value)

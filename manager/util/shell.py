@@ -14,7 +14,7 @@ def execute_shell_commands(commands, continue_on_failure=False):
     output = []
     error = []
     return_code = []
-    if type(commands) is list:
+    if type(commands) is not list:
         commands = [commands]
 
     for command in commands:

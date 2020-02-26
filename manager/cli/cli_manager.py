@@ -4,7 +4,7 @@ __version__ = "0.0.1"
 __set_operations__ = ["list", "show", "create", "delete", "export", "import"]
 __alias_operations__ = ["add", "remove", "set"]
 
-from cli.manager_validators import ValidatePath
+from cli.manager_validators import ValidatePath, ValidateNotEmpty
 from operations.set.create import create_set
 from operations.set.delete import delete_set
 from operations.set.export import export_set
@@ -78,10 +78,14 @@ def add_export_alias_set_action(subparsers):
     parser = subparsers.add_parser(EXPORT_OP, help="Export aliases set", description="Manager's export operation",
                                    formatter_class=get_costume_formatter())
     parser.add_argument("name", nargs="+", help="The set name")
-    parser.add_argument("-d", "--destination", dest=DESTINATION_ARG, help="The set name", required=True,
-                        metavar=DESTINATION_ARG, action=ValidatePath)
-    parser.add_argument("-f", "--format", dest=FORMAT_ARG, choices=formats, default=JSON_FORMAT,
-                        help="Export formatting " + str(formats), metavar=FORMAT_ARG,)
+    parser.add_argument("-d", "--destination", dest=DESTINATION_ARG, help="The set name", metavar=DESTINATION_ARG,
+                        required=True, action=ValidatePath)
+    parser.add_argument("-f", "--format", dest=FORMAT_ARG, choices=formats, default=JSON_FORMAT, metavar=FORMAT_ARG,
+                        help="Export formatting " + str(formats))
+    parser.add_argument("-p", "--package", dest=PACKAGE_ARG, help="Combine all sets into one set",
+                        metavar="package_name", action=ValidateNotEmpty)
+    parser.add_argument("-i", "--ignore-confliction", dest=IGNORE_CONFLICTION_ARG, action="store_true",
+                        help="Will drop the conflicting aliases from the export")
     parser.set_defaults(func=export_set)
 
 
