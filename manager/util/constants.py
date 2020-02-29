@@ -4,24 +4,39 @@ DATA_DIR_PATH = "./data/"
 # Formats
 JSON_FORMAT = "json"
 TABLE_FORMAT = "table"
+SOURCE_FORMAT = "source"
 
-# alias columns names
-NAME_COL = "name"
-COMMAND_COL = "command"
-DESCRIPTION_COL = "description"
-TAGS_COL = "tags"
-IS_ACTIVE_COL = "is_active"
-ALIAS_COLUMNS = [NAME_COL, COMMAND_COL, DESCRIPTION_COL, TAGS_COL, IS_ACTIVE_COL]
+# Alias attributes names
+NAME_ATTRIBUTE = "name"
+COMMAND_ATTRIBUTE = "command"
+DESCRIPTION_ATTRIBUTE = "description"
+TAGS_ATTRIBUTE = "tags"
+IS_ACTIVE_ATTRIBUTE = "is_active"
+SET_NAME_ATTRIBUTE = "set_name"
+
+# Display columns
+ALIAS_COLUMNS = [NAME_ATTRIBUTE, COMMAND_ATTRIBUTE, DESCRIPTION_ATTRIBUTE, TAGS_ATTRIBUTE, IS_ACTIVE_ATTRIBUTE]
+
+# Alias attributes defaults
+ALIAS_ATTRIBUTES_DEFAULTS = {
+    NAME_ATTRIBUTE: "",
+    COMMAND_ATTRIBUTE: "",
+    DESCRIPTION_ATTRIBUTE: "",
+    TAGS_ATTRIBUTE: "",
+    IS_ACTIVE_ATTRIBUTE: "false",
+    SET_NAME_ATTRIBUTE: ""
+}
 
 # Manager sets operations
 LIST_OP = "list"
 SHOW_OP = "show"
-DELETE_OP = "create"
-CREATE_OP = "delete"
+DELETE_OP = "delete"
+CREATE_OP = "create"
 EXPORT_OP = "export"
 IMPORT_OP = "import"
 
 # Manager aliases operations
+CURRENT_OP = "current"
 ADD_OP = "add"
 REMOVE_OP = "remove"
 SET_OP = "set"
@@ -36,4 +51,11 @@ COLUMNS_ARG = "columns"
 ALL_ARG = "all"
 YES_ARG = "yes"
 PACKAGE_ARG = "package"
-IGNORE_CONFLICTION_ARG = "ignore_confliction"
+IGNORE_CONFLICT_ARG = "ignore_conflict"
+OVERWRITE_ARG = "overwrite"
+REPLACE_ARG = 'replace'
+STDOUT_ARG = 'stdout'
+
+
+# args groups
+PATHS_GROUP = [DESTINATION_ARG, SOURCE_ARG, STDOUT_ARG]

@@ -35,3 +35,11 @@ def separate_file_from_path(value):
     file = file.group(0) if file is not None else ""
     path = path.group(0) if path is not None else ""
     return path, file
+
+
+def is_file(file_path):
+    return os.path.isfile(file_path)
+
+
+def is_directory(dir_path):
+    return os.path.isdir(dir_path)

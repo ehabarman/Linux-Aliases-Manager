@@ -3,7 +3,7 @@ import sys
 from util.helpers.files_helper import get_files_in_path
 from util.helpers.print_helper import print_table_in_console, print_json_in_console, print_divider
 from util.constants import DATA_DIR_PATH, JSON_FORMAT, TABLE_FORMAT, ALIAS_COLUMNS
-from util.helpers.json_helper import load_json_from_file
+from util.helpers.read_helper import load_json_from_file
 
 
 def show_set(args):
@@ -28,9 +28,9 @@ def show_set(args):
                 print("%s:" % name)
             view_data = load_json_from_file(name, DATA_DIR_PATH)
             if view_format == JSON_FORMAT:
-                print_json_in_console(view_data, *columns)
+                print_json_in_console(view_data, columns)
             elif view_format == TABLE_FORMAT:
-                print_table_in_console(view_data, *columns)
+                print_table_in_console(view_data, columns)
         except Exception as err:
             print("Operation failed: " + str(err))
         if index < names_count - 1:

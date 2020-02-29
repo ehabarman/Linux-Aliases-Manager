@@ -30,4 +30,3 @@ def execute_shell_commands(commands, continue_on_failure=False):
         error = error[0]
         return_code = return_code[0]
     output, error, return_code
-

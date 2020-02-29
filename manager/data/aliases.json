@@ -2,7 +2,7 @@
   {
       "name" : "locate",
       "command" : "sudo updatedb; mlocate",
-      "description" : "locate all files with the given pattern inside their paths",
+      "description" : "locate all files with the given pattern inside their paths. more more more more more more more more more more more more more more more more more more more more more more more more more more",
       "tags" : "find, locate, sudoer",
       "active" : false
     }

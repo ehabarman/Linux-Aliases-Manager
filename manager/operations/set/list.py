@@ -1,7 +1,7 @@
 from util.helpers.print_helper import print_json_in_console, print_table_in_console
 from util.constants import DATA_DIR_PATH, TABLE_FORMAT, JSON_FORMAT
 from util.helpers.files_helper import get_files_in_path
-from util.helpers.json_helper import load_json_from_file
+from util.helpers.read_helper import load_json_from_file
 
 __NAME__ = "Name"
 __STATUS__ = "Status"
@@ -27,6 +27,6 @@ def list_sets(args):
             except Exception:
                 json_data[__STATUS__] = __INVALID_STATUS__
     if view_format == JSON_FORMAT:
-        print_json_in_console(view_data, *headers)
+        print_json_in_console(view_data, headers)
     elif view_format == TABLE_FORMAT:
-        print_table_in_console(view_data, *headers)
+        print_table_in_console(view_data, headers)
