@@ -14,7 +14,8 @@ def delete_set(args):
         names = get_files_in_path(DATA_DIR_PATH)
     else:
         if not args.name:
-            sys.exit("Delete operation needs -a/--all flag or a name")
+            print("Delete operation needs -a/--all flag or a name")
+            sys.exit(1)
         names = args.name
 
     yes = args.yes
@@ -30,5 +31,7 @@ def delete_set(args):
                 print("deleted \"%s\" successfully" % name)
             except FileNotFoundError:
                 print("\"%s\" not found" % name)
+                sys.exit(1)
             except Exception as e:
                 print("Something went wrong: " + str(e))
+                sys.exit(1)

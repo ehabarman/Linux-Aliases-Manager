@@ -1,3 +1,5 @@
+import sys
+
 from operations.set.list import list_sets
 from util.constants import DATA_DIR_PATH, ALIAS_COLUMNS
 from util.helpers.files_helper import path_exists
@@ -12,6 +14,7 @@ def create_set(args):
 
     if path_exists(DATA_DIR_PATH + name) is True:
         print("'%s' set already exists" % name)
+        sys.exit(1)
     else:
         try:
             print_json_in_file([], ALIAS_COLUMNS, DATA_DIR_PATH + name)
@@ -21,3 +24,4 @@ def create_set(args):
             list_sets(args)
         except Exception as err:
             print("Failed to create set '%s'" % str(err))
+            sys.exit(1)

@@ -49,13 +49,16 @@ class ValidatePath(argparse.Action):
         if self.operation == SOURCE_ARG:
             if is_file(value) is not True:
                 raise argparse.ArgumentError(None, "Source must be a file")
-
         elif self.operation == DESTINATION_ARG:
             if is_directory(value) is not True:
                 raise argparse.ArgumentError(None, "Destination must be a directory")
             if not value.endswith("/"):
                 value += "/"
+        elif self.operation == STDOUT_ARG:
+            if is_directory(value) is True:
+                raise argparse.ArgumentError(None, "Destination can't be a directory")
 
+        print(value)
         setattr(namespace, self.dest, value)
 
 

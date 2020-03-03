@@ -17,7 +17,8 @@ def show_set(args):
         names = get_files_in_path(DATA_DIR_PATH)
     else:
         if not args.name:
-            sys.exit("Show operation needs -a/--all flag or a name")
+            print("Show operation needs -a/--all flag or a name")
+            sys.exit(1)
         names = args.name
     names_count = len(names)
     if columns is None:

@@ -1,3 +1,5 @@
+import sys
+
 from util.constants import TABLE_FORMAT, DATA_DIR_PATH, JSON_FORMAT, SET_NAME_ATTRIBUTE, ALIAS_COLUMNS, \
     ALIAS_ATTRIBUTES_DEFAULTS, NAME_ATTRIBUTE
 from util.helpers.files_helper import path_exists
@@ -55,6 +57,7 @@ def export_set(args):
 
             except Exception as err:
                 print("Failed to export package '{}': {}".format(package, str(err)))
+                sys.exit(1)
     else:
         # Export the sets separately
         for name in names:
@@ -74,6 +77,7 @@ def export_set(args):
                 print("Exported '{}' Successfully".format(name))
             except Exception as err:
                 print("Failed to export '{}': {}".format(name, str(err)))
+                sys.exit(1)
 
 
 def delete_an_element_handler(all_aliases, index):

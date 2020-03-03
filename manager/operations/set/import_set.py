@@ -32,9 +32,11 @@ def import_set(args):
 
             except Exception as err:
                 raise Exception(str(err))
+                sys.exit(1)
 
     except Exception as err:
         print("Importing '{}' into '{}' failed: {}".format(file, name, str(err)))
+        sys.exit(1)
 
 
 def pre_process_set_data(file, path):
