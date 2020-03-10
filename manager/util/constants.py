@@ -22,7 +22,7 @@ ALIAS_ATTRIBUTES_DEFAULTS = {
     NAME_ATTRIBUTE: "",
     COMMAND_ATTRIBUTE: "",
     DESCRIPTION_ATTRIBUTE: "",
-    TAGS_ATTRIBUTE: "",
+    TAGS_ATTRIBUTE: None,
     IS_ACTIVE_ATTRIBUTE: "false",
     SET_NAME_ATTRIBUTE: ""
 }
@@ -55,7 +55,11 @@ IGNORE_CONFLICT_ARG = "ignore_conflict"
 OVERWRITE_ARG = "overwrite"
 REPLACE_ARG = 'replace'
 STDOUT_ARG = 'stdout'
-
+COMMAND_ARG = "command"
+DESCRIPTION_ARG = "description"
+TAGS_ARG = "tags"
+IS_ACTIVE_ARG = "is_active"
+SET_NAME_ARG = "set_name"
 
 # args groups
 PATHS_GROUP = [DESTINATION_ARG, SOURCE_ARG, STDOUT_ARG]

@@ -3,6 +3,7 @@ import argparse
 __version__ = "0.0.1"
 
 from cli.manager_validators import ValidatePath, ValidateNotEmpty
+from operations.alias.add import add_alias
 from operations.alias.current import current_aliases
 from operations.set.create import create_set
 from operations.set.delete import delete_set
@@ -45,6 +46,7 @@ def add_subparsers(subparsers):
     add_import_alias_set_action(subparsers)
     add_list_aliases_sets_action(subparsers)
     add_show_aliases_set_details(subparsers)
+    add_add_alias_action(subparsers)
 
 
 def add_list_aliases_sets_action(subparsers):
@@ -71,8 +73,7 @@ def add_show_aliases_set_details(subparsers):
                         help="View formatting " + str(formats), metavar=FORMAT_ARG, )
     parser.add_argument("-a", "--all", action="store_true", dest=ALL_ARG, help="Show all saved sets")
     parser.add_argument("-c", "--columns", dest=COLUMNS_ARG, choices=ALIAS_COLUMNS, metavar=COLUMNS_ARG,
-                        action='append',
-                        help="Columns to be shown {}".format(ALIAS_COLUMNS))
+                        action='append', help="Columns to be shown {}".format(ALIAS_COLUMNS))
     parser.add_argument("name", nargs="+", help="The sets name", action=ValidateNotEmpty)
     parser.set_defaults(func=show_set)
 
@@ -148,3 +149,23 @@ def add_current_aliases_action(subparsers):
     parser.add_argument("-S", "--stdout", dest=STDOUT_ARG, help="Redirect output to file", metavar=STDOUT_ARG,
                         action=ValidatePath)
     parser.set_defaults(func=current_aliases)
+
+
+def add_add_alias_action(subparsers):
+    """
+        add new alias operation parser
+    """
+    parser = subparsers.add_parser(ADD_OP, help="add new alias to aliases set",
+                                   description="Manager's add operation", formatter_class=get_costume_formatter())
+    parser.add_argument(SET_NAME_ARG, help="The set name", action=ValidateNotEmpty)
+    parser.add_argument("-n", "--name", dest=NAME_ARG, metavar=NAME_ARG, help="new alias name",
+                        action=ValidateNotEmpty, required=True)
+    parser.add_argument("-c", "--command", dest=COMMAND_ARG, metavar=COMMAND_ARG, required=True,
+                        help="The alias's command", action=ValidateNotEmpty)
+    parser.add_argument("-d", "--description", dest=DESCRIPTION_ARG, metavar=DESCRIPTION_ARG,
+                        help="The alias's description", default="")
+    parser.add_argument("-t", "--tags", dest=TAGS_ARG, metavar=TAGS_ARG, help="The alias's tags",
+                        action='append')
+    parser.add_argument("-a", "--active", dest=IS_ACTIVE_ARG, help="The alias's initial status",
+                        action='store_true')
+    parser.set_defaults(func=add_alias)
