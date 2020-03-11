@@ -1,11 +1,23 @@
 [
-  {
-  },
-  {
-      "name" : "locate2",
-      "command" : "sudo updatedb; mlocate",
-      "description" : "locate all files with the given pattern inside their paths",
-      "tags" : "find, locate, sudo",
-      "is_active" : false
-  }
+    {
+        "command": "sudo updatedb; mlocate",
+        "description": "locate all files with the given pattern inside their paths",
+        "is_active": false,
+        "name": "locate2",
+        "tags": [
+            "find",
+            "locate",
+            "sudo"
+        ]
+    },
+    {
+        "command": "ls",
+        "description": "",
+        "is_active": false,
+        "name": "ls",
+        "tags": [
+            "directory",
+            "location"
+        ]
+    }
 ]

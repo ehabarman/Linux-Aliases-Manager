@@ -2,9 +2,11 @@ import argparse
 
 __version__ = "0.0.1"
 
-from cli.manager_validators import ValidatePath, ValidateNotEmpty
+from cli.manager_validators import ValidatePath, ValidateNotEmpty, ReduceWhiteSpacesToEmpty
 from operations.alias.add import add_alias
 from operations.alias.current import current_aliases
+from operations.alias.edit import edit_alias
+from operations.alias.remove import remove_aliases
 from operations.set.create import create_set
 from operations.set.delete import delete_set
 from operations.set.export import export_set
@@ -39,17 +41,18 @@ def add_subparsers(subparsers):
     """
         Call order determine order in help list
     """
-    add_create_alias_set_action(subparsers)
-    add_current_aliases_action(subparsers)
-    add_delete_alias_set_action(subparsers)
-    add_export_alias_set_action(subparsers)
-    add_import_alias_set_action(subparsers)
-    add_list_aliases_sets_action(subparsers)
-    add_show_aliases_set_details(subparsers)
-    add_add_alias_action(subparsers)
+    add_create_alias_set_operation(subparsers)
+    add_current_aliases_operation(subparsers)
+    add_delete_alias_set_operation(subparsers)
+    add_export_alias_set_operation(subparsers)
+    add_import_alias_set_operation(subparsers)
+    add_list_aliases_sets_operation(subparsers)
+    add_show_aliases_set_details_operation(subparsers)
+    add_add_alias_operation(subparsers)
+    add_remove_aliases_operation(subparsers)
 
 
-def add_list_aliases_sets_action(subparsers):
+def add_list_aliases_sets_operation(subparsers):
     """
         add list operation parser
     """
@@ -62,7 +65,7 @@ def add_list_aliases_sets_action(subparsers):
     parser.set_defaults(func=list_sets)
 
 
-def add_show_aliases_set_details(subparsers):
+def add_show_aliases_set_details_operation(subparsers):
     """
         add show operation parser
     """
@@ -78,7 +81,7 @@ def add_show_aliases_set_details(subparsers):
     parser.set_defaults(func=show_set)
 
 
-def add_create_alias_set_action(subparsers):
+def add_create_alias_set_operation(subparsers):
     """
         add create operation parser
     """
@@ -88,19 +91,19 @@ def add_create_alias_set_action(subparsers):
     parser.set_defaults(func=create_set)
 
 
-def add_delete_alias_set_action(subparsers):
+def add_delete_alias_set_operation(subparsers):
     """
         add delete operation parser
     """
     parser = subparsers.add_parser(DELETE_OP, help="Delete aliases set", description="Manager's delete operation",
                                    formatter_class=get_costume_formatter())
-    parser.add_argument("-y", "--yes", dest=YES_ARG, help="The set name", action="store_true")
+    parser.add_argument("-y", "--yes", dest=YES_ARG, help="Don't ask for confirmation", action="store_true")
     parser.add_argument("-a", "--all", dest=ALL_ARG, help="Delete all the stored sets", action="store_true")
     parser.add_argument("name", nargs="+", help="The set name", action=ValidateNotEmpty)
     parser.set_defaults(func=delete_set)
 
 
-def add_export_alias_set_action(subparsers):
+def add_export_alias_set_operation(subparsers):
     """
         add export operation parser
     """
@@ -121,7 +124,7 @@ def add_export_alias_set_action(subparsers):
     parser.set_defaults(func=export_set)
 
 
-def add_import_alias_set_action(subparsers):
+def add_import_alias_set_operation(subparsers):
     """
         add import operation parser
     """
@@ -137,7 +140,7 @@ def add_import_alias_set_action(subparsers):
     parser.set_defaults(func=import_set)
 
 
-def add_current_aliases_action(subparsers):
+def add_current_aliases_operation(subparsers):
     """
         add current aliases operation parser
     """
@@ -151,7 +154,7 @@ def add_current_aliases_action(subparsers):
     parser.set_defaults(func=current_aliases)
 
 
-def add_add_alias_action(subparsers):
+def add_add_alias_operation(subparsers):
     """
         add new alias operation parser
     """
@@ -164,8 +167,41 @@ def add_add_alias_action(subparsers):
                         help="The alias's command", action=ValidateNotEmpty)
     parser.add_argument("-d", "--description", dest=DESCRIPTION_ARG, metavar=DESCRIPTION_ARG,
                         help="The alias's description", default="")
-    parser.add_argument("-t", "--tags", dest=TAGS_ARG, metavar=TAGS_ARG, help="The alias's tags",
-                        action='append')
+    parser.add_argument("-t", "--tags", dest=TAGS_ARG, metavar=TAGS_ARG, help="The alias's tags", nargs="+",
+                        action=ReduceWhiteSpacesToEmpty)
     parser.add_argument("-a", "--active", dest=IS_ACTIVE_ARG, help="The alias's initial status",
                         action='store_true')
     parser.set_defaults(func=add_alias)
+
+
+def add_remove_aliases_operation(subparsers):
+    """
+            remove aliases from set operation parser
+    """
+    parser = subparsers.add_parser(REMOVE_OP, help="remove aliases from a set",
+                                   description="Manager's remove operation", formatter_class=get_costume_formatter())
+    parser.add_argument(SET_NAME_ARG, help="The set name", action=ValidateNotEmpty)
+    parser.add_argument("-n", "--name", dest=NAME_ARG, metavar=NAME_ARG, help="alias name", nargs="+",
+                        action=ValidateNotEmpty, required=True)
+    parser.add_argument("-y", "--yes", dest=YES_ARG, help="Don't ask for confirmation", action="store_true")
+    parser.set_defaults(func=remove_aliases)
+
+
+def add_edit_alias_operation(subparsers):
+    """
+            edit alias in a set operation parser
+    """
+    parser = subparsers.add_parser(EDIT_OP, help="edit alia in a set", description="Manager's edit operation",
+                                   formatter_class=get_costume_formatter())
+    parser.add_argument(SET_NAME_ARG, help="The set name", action=ValidateNotEmpty)
+    parser.add_argument(ALIAS_NAME_ARG, help="The alias name", action=ValidateNotEmpty)
+    parser.add_argument("-n", "--name", dest=NAME_ARG, metavar=NAME_ARG, help="new alias name",
+                        action=ValidateNotEmpty, required=True)
+    parser.add_argument("-c", "--command", dest=COMMAND_ARG, metavar=COMMAND_ARG, required=True,
+                        help="new alias command", action=ValidateNotEmpty)
+    parser.add_argument("-d", "--description", dest=DESCRIPTION_ARG, metavar=DESCRIPTION_ARG,
+                        help="new alias description", default="")
+    parser.add_argument("-t", "--tags", dest=TAGS_ARG, metavar=TAGS_ARG, help="new alias tags", nargs="+",
+                        action=ReduceWhiteSpacesToEmpty)
+    parser.add_argument("-a", "--active", dest=IS_ACTIVE_ARG, help="new alias status", choices=[True, False])
+    parser.set_defaults(func=edit_alias)

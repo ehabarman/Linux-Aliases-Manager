@@ -39,6 +39,7 @@ IMPORT_OP = "import"
 CURRENT_OP = "current"
 ADD_OP = "add"
 REMOVE_OP = "remove"
+EDIT_OP = "edit"
 SET_OP = "set"
 
 # args names
@@ -60,6 +61,7 @@ DESCRIPTION_ARG = "description"
 TAGS_ARG = "tags"
 IS_ACTIVE_ARG = "is_active"
 SET_NAME_ARG = "set_name"
+ALIAS_NAME_ARG = "alias_name"
 
 # args groups
 PATHS_GROUP = [DESTINATION_ARG, SOURCE_ARG, STDOUT_ARG]

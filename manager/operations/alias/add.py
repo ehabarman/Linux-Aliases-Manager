@@ -18,15 +18,13 @@ def add_alias(args):
     description = args.description
     tags = args.tags
     is_active = args.is_active
-
     try:
         if path_exists(DATA_DIR_PATH + set_name) is False:
             raise Exception("'{}' set does not exist".format(set_name))
         set_aliases = load_json_from_file(set_name, DATA_DIR_PATH)
         for alias in set_aliases:
-            if name == alias[NAME_ATTRIBUTE]:
+            if NAME_ATTRIBUTE in alias.keys() and name == alias[NAME_ATTRIBUTE]:
                 raise Exception("'{}' alias is already in set '{}'".format(name, set_name))
-
         alias = {
             NAME_ATTRIBUTE: name,
             COMMAND_ATTRIBUTE: command,

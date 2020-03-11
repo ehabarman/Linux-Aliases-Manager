@@ -6,10 +6,14 @@ from util.helpers.files_helper import path_exists, separate_file_from_path, is_f
 
 
 class ValidatePath(argparse.Action):
-    """needed for import and export operations"""
+    """
+        needed for import and export operations
+    """
 
     def __init__(self, option_strings, dest, nargs=None, **kwargs):
-        """Ensures only export and import operation using this action"""
+        """
+            Ensures only export and import operation using this action
+        """
         if nargs is not None:
             raise ValueError("nargs not allowed")
         if dest not in PATHS_GROUP:
@@ -18,7 +22,9 @@ class ValidatePath(argparse.Action):
         super(ValidatePath, self).__init__(option_strings, dest, **kwargs)
 
     def __call__(self, parser, namespace, value, option_string=None):
-        """Check path validity and reformat it if possible"""
+        """
+            Check path validity and reformat it if possible
+        """
 
         if not value:
             raise argparse.ArgumentError(None, f"You need to pass non-empty value to {self.dest}")
@@ -63,20 +69,49 @@ class ValidatePath(argparse.Action):
 
 
 class ValidateNotEmpty(argparse.Action):
-    """Check if user passing an empty parameters"""
+    """
+        Check if user passing an empty parameters
+        note: use nargs="+" if you want to check for a list of values
+    """
+
+    def __init__(self, option_strings, dest, nargs=None, **kwargs):
+
+        self.is_list = nargs == "+"
+        super(ValidateNotEmpty, self).__init__(option_strings, dest, nargs, **kwargs)
+
+    def __call__(self, parser, namespace, value, option_string=None):
+        """
+            Check if value is empty
+        """
+        if self.is_list is False:
+            if value.strip() == "":
+                raise argparse.ArgumentError(None, f"You need to pass non-empty value to {self.dest}")
+        else:
+            value = list(filter(lambda x: x.strip() != "", value))
+            if not value:
+                raise argparse.ArgumentError(None, f"You need to pass non-empty value to {self.dest}")
+
+        setattr(namespace, self.dest, value)
+
+
+class ReduceWhiteSpacesToEmpty(argparse.Action):
+    """
+        If passing values contain only whitespaces then it will stored as empty
+        Note: required nargs='+' to handle it as a list
+    """
 
     def __init__(self, option_strings, dest, nargs=None, **kwargs):
         self.is_list = nargs == "+"
         super(ValidateNotEmpty, self).__init__(option_strings, dest, nargs, **kwargs)
 
     def __call__(self, parser, namespace, value, option_string=None):
-        """Check if value is empty"""
+        """
+            if value is whitespaces or list of whitespaces values then it will be stored as empty
+        """
         if self.is_list is False:
-            if value == "":
-                raise argparse.ArgumentError(None, f"You need to pass non-empty value to {self.dest}")
+            if value.strip() == "":
+                value = ""
         else:
             value = list(filter(lambda x: x.strip() != "", value))
-            if not value:
-                raise argparse.ArgumentError(None, f"You need to pass non-empty value to {self.dest}")
 
         setattr(namespace, self.dest, value)
