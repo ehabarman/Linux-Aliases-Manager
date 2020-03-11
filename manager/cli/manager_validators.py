@@ -102,7 +102,7 @@ class ReduceWhiteSpacesToEmpty(argparse.Action):
 
     def __init__(self, option_strings, dest, nargs=None, **kwargs):
         self.is_list = nargs == "+"
-        super(ValidateNotEmpty, self).__init__(option_strings, dest, nargs, **kwargs)
+        super(ReduceWhiteSpacesToEmpty, self).__init__(option_strings, dest, nargs, **kwargs)
 
     def __call__(self, parser, namespace, value, option_string=None):
         """

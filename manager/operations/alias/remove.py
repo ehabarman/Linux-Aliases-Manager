@@ -47,7 +47,6 @@ def remove_aliases(args):
             remaining_aliases = list(filter(lambda alias: alias[NAME_ATTRIBUTE] not in found_aliases, set_aliases))
             print_json_in_file(remaining_aliases, ALIAS_COLUMNS, DATA_DIR_PATH + set_name)
             print_table_in_console(remaining_aliases, ALIAS_COLUMNS)
-            print("The remove operation had finished")
 
     except Exception as e:
         print("Operation failed: {}".format(str(e)))

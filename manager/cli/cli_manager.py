@@ -50,6 +50,7 @@ def add_subparsers(subparsers):
     add_show_aliases_set_details_operation(subparsers)
     add_add_alias_operation(subparsers)
     add_remove_aliases_operation(subparsers)
+    add_edit_alias_operation(subparsers)
 
 
 def add_list_aliases_sets_operation(subparsers):
@@ -165,8 +166,8 @@ def add_add_alias_operation(subparsers):
                         action=ValidateNotEmpty, required=True)
     parser.add_argument("-c", "--command", dest=COMMAND_ARG, metavar=COMMAND_ARG, required=True,
                         help="The alias's command", action=ValidateNotEmpty)
-    parser.add_argument("-d", "--description", dest=DESCRIPTION_ARG, metavar=DESCRIPTION_ARG,
-                        help="The alias's description", default="")
+    parser.add_argument("-d", "--description", dest=DESCRIPTION_ARG, metavar=DESCRIPTION_ARG, default="",
+                        help="The alias's description", action=ReduceWhiteSpacesToEmpty)
     parser.add_argument("-t", "--tags", dest=TAGS_ARG, metavar=TAGS_ARG, help="The alias's tags", nargs="+",
                         action=ReduceWhiteSpacesToEmpty)
     parser.add_argument("-a", "--active", dest=IS_ACTIVE_ARG, help="The alias's initial status",
@@ -196,11 +197,11 @@ def add_edit_alias_operation(subparsers):
     parser.add_argument(SET_NAME_ARG, help="The set name", action=ValidateNotEmpty)
     parser.add_argument(ALIAS_NAME_ARG, help="The alias name", action=ValidateNotEmpty)
     parser.add_argument("-n", "--name", dest=NAME_ARG, metavar=NAME_ARG, help="new alias name",
-                        action=ValidateNotEmpty, required=True)
-    parser.add_argument("-c", "--command", dest=COMMAND_ARG, metavar=COMMAND_ARG, required=True,
-                        help="new alias command", action=ValidateNotEmpty)
+                        action=ValidateNotEmpty)
+    parser.add_argument("-c", "--command", dest=COMMAND_ARG, metavar=COMMAND_ARG, help="new alias command",
+                        action=ValidateNotEmpty)
     parser.add_argument("-d", "--description", dest=DESCRIPTION_ARG, metavar=DESCRIPTION_ARG,
-                        help="new alias description", default="")
+                        help="new alias description", action=ReduceWhiteSpacesToEmpty)
     parser.add_argument("-t", "--tags", dest=TAGS_ARG, metavar=TAGS_ARG, help="new alias tags", nargs="+",
                         action=ReduceWhiteSpacesToEmpty)
     parser.add_argument("-a", "--active", dest=IS_ACTIVE_ARG, help="new alias status", choices=[True, False])
