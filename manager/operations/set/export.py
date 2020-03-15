@@ -77,7 +77,6 @@ def export_set(args):
                 print("Exported '{}' Successfully".format(name))
             except Exception as err:
                 print("Failed to export '{}': {}".format(name, str(err)))
-                sys.exit(1)
 
 
 def delete_an_element_handler(all_aliases, index):
