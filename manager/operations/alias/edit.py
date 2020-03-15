@@ -20,13 +20,17 @@ def edit_alias(args):
     new_is_active = args.is_active
 
     try:
+        if all(value is None for value in [new_name, new_command, new_description, new_tags, new_is_active]):
+            raise Exception("Need to pass something for edit to work".format(set_name))
+
         if path_exists(DATA_DIR_PATH + set_name) is False:
             raise Exception("'{}' set does not exist".format(set_name))
+
         set_aliases = load_json_from_file(set_name, DATA_DIR_PATH)
 
         target_alias = None
         for alias in set_aliases:
-            if alias_name == alias_name[NAME_ATTRIBUTE]:
+            if alias_name == alias[NAME_ATTRIBUTE]:
                 target_alias = alias
                 break
 

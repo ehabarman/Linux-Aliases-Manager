@@ -41,6 +41,7 @@ ADD_OP = "add"
 REMOVE_OP = "remove"
 EDIT_OP = "edit"
 SET_OP = "set"
+GENERATE_OP = "generate"
 
 # args names
 DESTINATION_ARG = "destination"
@@ -62,6 +63,7 @@ TAGS_ARG = "tags"
 IS_ACTIVE_ARG = "is_active"
 SET_NAME_ARG = "set_name"
 ALIAS_NAME_ARG = "alias_name"
-
+KEEP_TAGS_ARG = "keep_tags"
+KEEP_DESCRIPTION_ARG = "keep_description"
 # args groups
 PATHS_GROUP = [DESTINATION_ARG, SOURCE_ARG, STDOUT_ARG]
