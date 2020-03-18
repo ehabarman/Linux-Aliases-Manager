@@ -1,4 +1,4 @@
-from util.constants import NAME_ATTRIBUTE, COMMAND_ATTRIBUTE
+from util.constants import NAME_ATTRIBUTE, COMMAND_ATTRIBUTE, SET_NAME_ATTRIBUTE
 
 
 def remove_non_valid_aliases(aliases):
@@ -31,3 +31,12 @@ def handle_conflict(all_aliases, handler):
             index += 1
 
     return all_aliases
+
+
+def delete_an_element_handler(all_aliases, index):
+    del all_aliases[index]
+
+
+def change_name_handler(all_aliases, index):
+    alias = all_aliases[index]
+    all_aliases[index][NAME_ATTRIBUTE] = "{}-{}".format(alias[SET_NAME_ATTRIBUTE], alias[NAME_ATTRIBUTE])

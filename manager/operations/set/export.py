@@ -3,7 +3,8 @@ import sys
 from util.constants import TABLE_FORMAT, DATA_DIR_PATH, JSON_FORMAT, SET_NAME_ATTRIBUTE, ALIAS_COLUMNS, \
     ALIAS_ATTRIBUTES_DEFAULTS, NAME_ATTRIBUTE
 from util.helpers.files_helper import path_exists
-from util.helpers.filters import remove_non_valid_aliases, handle_conflict
+from util.helpers.filters import remove_non_valid_aliases, handle_conflict, change_name_handler, \
+    delete_an_element_handler
 from util.helpers.read_helper import load_json_from_file
 from util.helpers.print_helper import print_table_in_file, print_json_in_file
 from util.shell import execute_shell_command
@@ -22,7 +23,7 @@ def export_set(args):
     if package is not None:
         # Export all sets into a single file
         destination_file = destination + package
-        if path_exists(destination + package) and overwrite is not True:
+        if path_exists(destination_file) and overwrite is not True:
             print("'{}' already exists in destination".format(destination_file))
         else:
             all_aliases = []
@@ -77,12 +78,3 @@ def export_set(args):
                 print("Exported '{}' Successfully".format(name))
             except Exception as err:
                 print("Failed to export '{}': {}".format(name, str(err)))
-
-
-def delete_an_element_handler(all_aliases, index):
-    del all_aliases[index]
-
-
-def change_name_handler(all_aliases, index):
-    alias = all_aliases[index]
-    all_aliases[index][NAME_ATTRIBUTE] = "{}-{}".format(alias[SET_NAME_ATTRIBUTE], alias[NAME_ATTRIBUTE])
