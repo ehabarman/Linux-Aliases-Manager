@@ -1,6 +1,6 @@
 import json
 from json import JSONDecodeError
-from util.helpers.files_helper import join_file_and_path, path_exists
+from util.helpers.files_helpers import join_file_and_path, path_exists
 
 
 def load_json_from_file(json_file_name, json_file_path):

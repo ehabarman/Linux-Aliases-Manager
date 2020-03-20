@@ -1,9 +1,9 @@
 import sys
 
-from util.helpers.files_helper import get_files_in_path
-from util.helpers.print_helper import print_table_in_console, print_json_in_console, print_divider
-from util.constants import DATA_DIR_PATH, JSON_FORMAT, TABLE_FORMAT, ALIAS_COLUMNS
-from util.helpers.read_helper import load_json_from_file
+from util.helpers.files_helpers import get_files_in_path
+from util.helpers.print_helpers import print_table_in_console, print_json_in_console, print_divider
+from util.constants import data_dir_path, JSON_FORMAT, TABLE_FORMAT, ALIAS_COLUMNS
+from util.helpers.read_helpers import load_json_from_file
 
 
 def show_set(args):
@@ -14,7 +14,7 @@ def show_set(args):
     columns = args.columns
     view_format = args.format
     if show_all is True:
-        names = get_files_in_path(DATA_DIR_PATH)
+        names = get_files_in_path(data_dir_path)
     else:
         if not args.name:
             print("Show operation needs -a/--all flag or a name")
@@ -27,7 +27,7 @@ def show_set(args):
         try:
             if names_count > 1:
                 print("%s:" % name)
-            view_data = load_json_from_file(name, DATA_DIR_PATH)
+            view_data = load_json_from_file(name, data_dir_path)
             if view_format == JSON_FORMAT:
                 print_json_in_console(view_data, columns)
             elif view_format == TABLE_FORMAT:

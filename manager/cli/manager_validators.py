@@ -2,7 +2,7 @@ import argparse
 import os
 
 from util.constants import DESTINATION_ARG, SOURCE_ARG, PATHS_GROUP, STDOUT_ARG
-from util.helpers.files_helper import path_exists, separate_file_from_path, is_file, is_directory
+from util.helpers.files_helpers import path_exists, separate_file_from_path, is_file, is_directory
 
 
 class ValidatePath(argparse.Action):

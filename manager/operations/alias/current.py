@@ -2,7 +2,7 @@ import sys
 
 from util.constants import SOURCE_FORMAT, JSON_FORMAT, TABLE_FORMAT, NAME_ATTRIBUTE, COMMAND_ATTRIBUTE, \
     DESCRIPTION_ATTRIBUTE, TAGS_ATTRIBUTE, IS_ACTIVE_ATTRIBUTE, ALIAS_COLUMNS
-from util.helpers.print_helper import print_table_in_console, print_json_in_console, print_raw_data_in_file, \
+from util.helpers.print_helpers import print_table_in_console, print_json_in_console, print_raw_data_in_file, \
     print_table_in_file, print_json_in_file
 from util.shell import execute_shell_command
 

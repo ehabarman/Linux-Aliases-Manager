@@ -1,5 +1,7 @@
+import os
+
 # Data directory
-DATA_DIR_PATH = "./data/"
+data_dir_path = os.path.dirname(__file__) + "/../data/"
 
 # Formats
 JSON_FORMAT = "json"

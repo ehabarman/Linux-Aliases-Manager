@@ -1,12 +1,12 @@
 import sys
 
-from util.constants import DATA_DIR_PATH, TAGS_ATTRIBUTE, DESCRIPTION_ATTRIBUTE, COMMAND_ATTRIBUTE, NAME_ATTRIBUTE, \
+from util.constants import data_dir_path, TAGS_ATTRIBUTE, DESCRIPTION_ATTRIBUTE, COMMAND_ATTRIBUTE, NAME_ATTRIBUTE, \
     ALIAS_ATTRIBUTES_DEFAULTS, SET_NAME_ATTRIBUTE, IS_ACTIVE_ATTRIBUTE
-from util.helpers.files_helper import path_exists, is_file
+from util.helpers.files_helpers import path_exists, is_file
 from util.helpers.filters import remove_non_valid_aliases, handle_conflict, change_name_handler, \
     delete_an_element_handler
-from util.helpers.print_helper import print_raw_data_in_file
-from util.helpers.read_helper import load_json_from_file
+from util.helpers.print_helpers import print_raw_data_in_file
+from util.helpers.read_helpers import load_json_from_file
 
 
 def generate_aliases_source(args):
@@ -32,7 +32,7 @@ def generate_aliases_source(args):
             all_aliases = []
             for set_name in set_names:
                 try:
-                    aliases_set = load_json_from_file(set_name, DATA_DIR_PATH)
+                    aliases_set = load_json_from_file(set_name, data_dir_path)
                     for alias in aliases_set:
                         temp = {}
                         for attribute in ALIAS_ATTRIBUTES_DEFAULTS.keys():
@@ -64,7 +64,7 @@ def generate_aliases_source(args):
         for name in set_names:
             try:
                 destination_file = destination + name
-                aliases = load_json_from_file(name, DATA_DIR_PATH)
+                aliases = load_json_from_file(name, data_dir_path)
 
                 if path_exists(destination_file) and overwrite is not True:
                     raise Exception("file already exits in destination")

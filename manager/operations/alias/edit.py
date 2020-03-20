@@ -1,10 +1,10 @@
 import sys
 
-from util.constants import DATA_DIR_PATH, NAME_ATTRIBUTE, IS_ACTIVE_ATTRIBUTE, TAGS_ATTRIBUTE, DESCRIPTION_ATTRIBUTE, \
+from util.constants import data_dir_path, NAME_ATTRIBUTE, IS_ACTIVE_ATTRIBUTE, TAGS_ATTRIBUTE, DESCRIPTION_ATTRIBUTE, \
     COMMAND_ATTRIBUTE, ALIAS_COLUMNS
-from util.helpers.files_helper import path_exists
-from util.helpers.print_helper import print_json_in_file, print_table_in_console
-from util.helpers.read_helper import load_json_from_file
+from util.helpers.files_helpers import path_exists
+from util.helpers.print_helpers import print_json_in_file, print_table_in_console
+from util.helpers.read_helpers import load_json_from_file
 
 
 def edit_alias(args):
@@ -23,10 +23,10 @@ def edit_alias(args):
         if all(value is None for value in [new_name, new_command, new_description, new_tags, new_is_active]):
             raise Exception("Need to pass something for edit to work".format(set_name))
 
-        if path_exists(DATA_DIR_PATH + set_name) is False:
+        if path_exists(data_dir_path + set_name) is False:
             raise Exception("'{}' set does not exist".format(set_name))
 
-        set_aliases = load_json_from_file(set_name, DATA_DIR_PATH)
+        set_aliases = load_json_from_file(set_name, data_dir_path)
 
         target_alias = None
         for alias in set_aliases:
@@ -50,7 +50,7 @@ def edit_alias(args):
         target_alias[IS_ACTIVE_ATTRIBUTE] = new_is_active if new_is_active is not None \
             else target_alias[IS_ACTIVE_ATTRIBUTE]
 
-        print_json_in_file(set_aliases, ALIAS_COLUMNS, DATA_DIR_PATH + set_name)
+        print_json_in_file(set_aliases, ALIAS_COLUMNS, data_dir_path + set_name)
         print_table_in_console(set_aliases, ALIAS_COLUMNS)
 
     except Exception as e:

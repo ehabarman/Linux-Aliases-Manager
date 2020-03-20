@@ -1,8 +1,8 @@
-from util.constants import DATA_DIR_PATH, NAME_ATTRIBUTE, ALIAS_COLUMNS
-from util.helpers.files_helper import path_exists, separate_file_from_path
+from util.constants import data_dir_path, NAME_ATTRIBUTE, ALIAS_COLUMNS
+from util.helpers.files_helpers import path_exists, separate_file_from_path
 from util.helpers.filters import remove_non_valid_aliases, handle_conflict
-from util.helpers.print_helper import print_json_in_file
-from util.helpers.read_helper import load_json_from_file
+from util.helpers.print_helpers import print_json_in_file
+from util.helpers.read_helpers import load_json_from_file
 
 
 def import_set(args):
@@ -16,19 +16,19 @@ def import_set(args):
     path, file = separate_file_from_path(source)
     try:
         imported_data = pre_process_set_data(file, path)
-        if path_exists(DATA_DIR_PATH + name) is not True or overwrite is True:
+        if path_exists(data_dir_path + name) is not True or overwrite is True:
             # If set is new or overwrite is true then put data directly
-            print_json_in_file(imported_data, ALIAS_COLUMNS, DATA_DIR_PATH + name)
+            print_json_in_file(imported_data, ALIAS_COLUMNS, data_dir_path + name)
         else:
             try:
-                set_data = pre_process_set_data(name, DATA_DIR_PATH)
+                set_data = pre_process_set_data(name, data_dir_path)
 
                 if replace is True:
                     result = append_aliases_with_replacing_repetitive(imported_data, set_data)
                 else:
                     result = handle_conflict(set_data + imported_data, attach_index_to_name)
 
-                print_json_in_file(result, ALIAS_COLUMNS, DATA_DIR_PATH + name)
+                print_json_in_file(result, ALIAS_COLUMNS, data_dir_path + name)
 
             except Exception as err:
                 raise Exception(str(err))

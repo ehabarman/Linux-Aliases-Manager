@@ -1,12 +1,12 @@
 import sys
 
-from util.constants import TABLE_FORMAT, DATA_DIR_PATH, JSON_FORMAT, SET_NAME_ATTRIBUTE, ALIAS_COLUMNS, \
+from util.constants import TABLE_FORMAT, data_dir_path, JSON_FORMAT, SET_NAME_ATTRIBUTE, ALIAS_COLUMNS, \
     ALIAS_ATTRIBUTES_DEFAULTS, NAME_ATTRIBUTE
-from util.helpers.files_helper import path_exists
+from util.helpers.files_helpers import path_exists
 from util.helpers.filters import remove_non_valid_aliases, handle_conflict, change_name_handler, \
     delete_an_element_handler
-from util.helpers.read_helper import load_json_from_file
-from util.helpers.print_helper import print_table_in_file, print_json_in_file
+from util.helpers.read_helpers import load_json_from_file
+from util.helpers.print_helpers import print_table_in_file, print_json_in_file
 from util.shell import execute_shell_command
 
 
@@ -29,7 +29,7 @@ def export_set(args):
             all_aliases = []
             for name in names:
                 try:
-                    aliases_set = load_json_from_file(name, DATA_DIR_PATH)
+                    aliases_set = load_json_from_file(name, data_dir_path)
                     for alias in aliases_set:
                         temp = {}
                         for attribute in ALIAS_ATTRIBUTES_DEFAULTS.keys():
@@ -64,13 +64,13 @@ def export_set(args):
         for name in names:
             try:
                 destination_file = destination + name
-                data = load_json_from_file(name, DATA_DIR_PATH)
+                data = load_json_from_file(name, data_dir_path)
 
                 if path_exists(destination_file) and overwrite is not True:
                     raise Exception("file already exits in destination")
 
                 if view_format == JSON_FORMAT:
-                    output, err, rc = execute_shell_command("cp {} {}".format(DATA_DIR_PATH + name, destination_file))
+                    output, err, rc = execute_shell_command("cp {} {}".format(data_dir_path + name, destination_file))
                     if rc != 0:
                         raise Exception(err)
                 elif view_format == TABLE_FORMAT:

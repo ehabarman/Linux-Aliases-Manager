@@ -1,7 +1,7 @@
 import sys
 
-from util.constants import DATA_DIR_PATH
-from util.helpers.files_helper import remove_file, get_files_in_path
+from util.constants import data_dir_path
+from util.helpers.files_helpers import remove_file, get_files_in_path
 
 
 def delete_set(args):
@@ -11,7 +11,7 @@ def delete_set(args):
     delete_all = args.all
 
     if delete_all is True:
-        names = get_files_in_path(DATA_DIR_PATH)
+        names = get_files_in_path(data_dir_path)
     else:
         if not args.name:
             print("Delete operation needs -a/--all flag or a name")
@@ -27,7 +27,7 @@ def delete_set(args):
     if yes is True:
         for name in names:
             try:
-                remove_file(DATA_DIR_PATH + name)
+                remove_file(data_dir_path + name)
                 print("deleted \"%s\" successfully" % name)
             except FileNotFoundError:
                 print("\"%s\" not found" % name)

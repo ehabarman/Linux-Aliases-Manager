@@ -16,7 +16,7 @@ from operations.set.list import list_sets
 
 from operations.set.show import show_set
 from util.constants import *
-from util.helpers.print_helper import get_console_width
+from util.helpers.print_helpers import get_console_width
 
 
 def setup_parser():
