@@ -9,7 +9,7 @@ from util.shell import execute_shell_command
 
 def current_aliases(args):
     """
-        Shows aliases sourced by the current user
+    Shows aliases sourced by the current user
     """
     format_view = args.format
     stdout = args.stdout

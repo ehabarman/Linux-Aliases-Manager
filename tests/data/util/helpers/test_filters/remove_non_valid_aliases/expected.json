@@ -1,0 +1,13 @@
+[
+  {
+    "command": "cmd 1",
+    "name": "name 1",
+    "description": "locate all files with the given pattern inside their paths",
+    "is_active": false,
+    "tags": "find, locate, sudo"
+  },
+  {
+    "command": "cmd 2",
+    "name": "name 3"
+  }
+]

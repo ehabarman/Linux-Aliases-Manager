@@ -1,7 +1,13 @@
-from util.constants import NAME_ATTRIBUTE, COMMAND_ATTRIBUTE, SET_NAME_ATTRIBUTE
+from ..constants import NAME_ATTRIBUTE, COMMAND_ATTRIBUTE, SET_NAME_ATTRIBUTE
 
 
 def remove_non_valid_aliases(aliases):
+    """
+    Given a list of aliases, it will remove aliases that doesn't have a name or a command
+
+    @param aliases: List of aliases
+    @return: Filtered list
+    """
     result = []
     for alias in aliases:
         keys = alias.keys()
@@ -13,8 +19,9 @@ def remove_non_valid_aliases(aliases):
 
 
 def handle_conflict(all_aliases, handler):
-    """Find confliction and fix them"""
-
+    """
+    Finds conflictions and fix them
+    """
     # Sort aliases by name
     all_aliases = sorted(all_aliases, key=lambda alias: (alias[NAME_ATTRIBUTE]))
 

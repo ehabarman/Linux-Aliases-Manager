@@ -29,7 +29,9 @@ def setup_parser():
 
 
 def get_costume_formatter(formatter=argparse.ArgumentDefaultsHelpFormatter):
-    """Return a wider HelpFormatter, if possible."""
+    """
+    Return a wider HelpFormatter, if possible.
+    """
     try:
         kwargs = {'width': max(min(get_console_width(), 160), 80), 'max_help_position': 40}
         formatter(None, **kwargs)
@@ -40,7 +42,7 @@ def get_costume_formatter(formatter=argparse.ArgumentDefaultsHelpFormatter):
 
 def add_subparsers(subparsers):
     """
-        Call order determine order in help list
+    Call order determine order in help list
     """
     add_create_alias_set_operation(subparsers)
     add_current_aliases_operation(subparsers)
@@ -57,7 +59,7 @@ def add_subparsers(subparsers):
 
 def add_list_aliases_sets_operation(subparsers):
     """
-        Add list operation parser
+    Add list operation parser
     """
     formats = [JSON_FORMAT, TABLE_FORMAT]
     parser = subparsers.add_parser(LIST_OP, help="List aliases sets", description="Manager's list operation",
@@ -70,7 +72,7 @@ def add_list_aliases_sets_operation(subparsers):
 
 def add_show_aliases_set_details_operation(subparsers):
     """
-        Add show operation parser
+    Add show operation parser
     """
     formats = [JSON_FORMAT, TABLE_FORMAT]
     parser = subparsers.add_parser(SHOW_OP, help="Show aliases in a set", description="Manager's show operation",
@@ -86,7 +88,7 @@ def add_show_aliases_set_details_operation(subparsers):
 
 def add_create_alias_set_operation(subparsers):
     """
-        Add create operation parser
+    Add create operation parser
     """
     parser = subparsers.add_parser(CREATE_OP, help="Create aliases set", description="Manager's create operation",
                                    formatter_class=get_costume_formatter())
@@ -96,7 +98,7 @@ def add_create_alias_set_operation(subparsers):
 
 def add_delete_alias_set_operation(subparsers):
     """
-        Add delete operation parser
+    Add delete operation parser
     """
     parser = subparsers.add_parser(DELETE_OP, help="Delete aliases set", description="Manager's delete operation",
                                    formatter_class=get_costume_formatter())
@@ -108,7 +110,7 @@ def add_delete_alias_set_operation(subparsers):
 
 def add_export_alias_set_operation(subparsers):
     """
-        Add export operation parser
+    Add export operation parser
     """
     formats = [JSON_FORMAT, TABLE_FORMAT]
     parser = subparsers.add_parser(EXPORT_OP, help="Export aliases set", description="Manager's export operation",
@@ -129,7 +131,7 @@ def add_export_alias_set_operation(subparsers):
 
 def add_import_alias_set_operation(subparsers):
     """
-        Add import operation parser
+    Add import operation parser
     """
     parser = subparsers.add_parser(IMPORT_OP, help="Import aliases set", description="Manager's import operation",
                                    formatter_class=get_costume_formatter())
@@ -145,7 +147,7 @@ def add_import_alias_set_operation(subparsers):
 
 def add_current_aliases_operation(subparsers):
     """
-        Add current aliases operation parser
+    Add current aliases operation parser
     """
     formats = [JSON_FORMAT, TABLE_FORMAT, SOURCE_FORMAT]
     parser = subparsers.add_parser(CURRENT_OP, help="Shows the current user loaded aliases(temp aliases are excluded)",
@@ -159,7 +161,7 @@ def add_current_aliases_operation(subparsers):
 
 def add_add_alias_operation(subparsers):
     """
-        Add new alias operation parser
+    Add new alias operation parser
     """
     parser = subparsers.add_parser(ADD_OP, help="Add new alias to aliases set",
                                    description="Manager's add operation", formatter_class=get_costume_formatter())
@@ -179,7 +181,7 @@ def add_add_alias_operation(subparsers):
 
 def add_remove_aliases_operation(subparsers):
     """
-        Remove aliases from set operation parser
+    Remove aliases from set operation parser
     """
     parser = subparsers.add_parser(REMOVE_OP, help="Remove aliases from a set",
                                    description="Manager's remove operation", formatter_class=get_costume_formatter())
@@ -192,7 +194,7 @@ def add_remove_aliases_operation(subparsers):
 
 def add_edit_alias_operation(subparsers):
     """
-        Edit alias in a set operation parser
+    Edit alias in a set operation parser
     """
     parser = subparsers.add_parser(EDIT_OP, help="Edit alias in a set", description="Manager's edit operation",
                                    formatter_class=get_costume_formatter())
@@ -212,7 +214,7 @@ def add_edit_alias_operation(subparsers):
 
 def add_generate_aliases_source(subparsers):
     """
-        Generate aliases source from sets
+    Generate aliases source from sets
     """
     parser = subparsers.add_parser(GENERATE_OP, help="Generate aliases source from a set or more",
                                    description="Manager's edit operation", formatter_class=get_costume_formatter())

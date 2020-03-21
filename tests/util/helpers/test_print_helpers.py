@@ -1,17 +1,41 @@
 import unittest
 
-from tests.test_config import tests_data_dir
 from manager.util.helpers.print_helpers import *
 
 
 class TestFilesHelpers(unittest.TestCase):
-    data_path = tests_data_dir() + "util/helpers/test_print_helpers/"
 
     def test_prepare_json(self):
-        pass
-
-    def test_get_console_width(self):
-        pass
-
-    def test_print_divider(self):
-        pass
+        test_data = [
+            {
+                "key1": 1,
+                "key2": 2,
+                "key3": 3,
+            },
+            {
+                "key1": 1,
+                "key2": 2,
+            },
+            {
+                "key3": 3,
+                "key4": 4,
+            },
+        ]
+        expected_data = [
+            {
+                "key1": 1,
+                "key2": 2,
+                "key3": 3,
+            },
+            {
+                "key1": 1,
+                "key2": 2,
+                "key3": None,
+            },
+            {
+                "key1": None,
+                "key2": None,
+                "key3": 3,
+            },
+        ]
+        self.assertEqual(expected_data, prepare_json(test_data, "key1", "key2", "key3"))

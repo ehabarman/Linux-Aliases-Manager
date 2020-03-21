@@ -7,12 +7,12 @@ from util.helpers.files_helpers import path_exists, separate_file_from_path, is_
 
 class ValidatePath(argparse.Action):
     """
-        needed for import and export operations
+    needed for import and export operations
     """
 
     def __init__(self, option_strings, dest, nargs=None, **kwargs):
         """
-            Ensures only export and import operation using this action
+        Ensures only export and import operation using this action
         """
         if nargs is not None:
             raise ValueError("nargs not allowed")
@@ -23,7 +23,7 @@ class ValidatePath(argparse.Action):
 
     def __call__(self, parser, namespace, value, option_string=None):
         """
-            Check path validity and reformat it if possible
+        Check path validity and reformat it if possible
         """
 
         if not value:
@@ -70,8 +70,8 @@ class ValidatePath(argparse.Action):
 
 class ValidateNotEmpty(argparse.Action):
     """
-        Check if user passing an empty parameters
-        note: use nargs="+" if you want to check for a list of values
+    Check if user passing an empty parameters
+    note: use nargs="+" if you want to check for a list of values
     """
 
     def __init__(self, option_strings, dest, nargs=None, **kwargs):
@@ -81,7 +81,7 @@ class ValidateNotEmpty(argparse.Action):
 
     def __call__(self, parser, namespace, value, option_string=None):
         """
-            Check if value is empty
+        Check if value is empty
         """
         if self.is_list is False:
             if value.strip() == "":
@@ -96,8 +96,8 @@ class ValidateNotEmpty(argparse.Action):
 
 class ReduceWhiteSpacesToEmpty(argparse.Action):
     """
-        If passing values contain only whitespaces then it will stored as empty
-        Note: required nargs='+' to handle it as a list
+    If passing values contain only whitespaces then it will stored as empty
+    Note: required nargs='+' to handle it as a list
     """
 
     def __init__(self, option_strings, dest, nargs=None, **kwargs):
@@ -106,7 +106,7 @@ class ReduceWhiteSpacesToEmpty(argparse.Action):
 
     def __call__(self, parser, namespace, value, option_string=None):
         """
-            if value is whitespaces or list of whitespaces values then it will be stored as empty
+        if value is whitespaces or list of whitespaces values then it will be stored as empty
         """
         if self.is_list is False:
             if value.strip() == "":

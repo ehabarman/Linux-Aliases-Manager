@@ -1,6 +1,7 @@
 import sys
 
-from util.constants import data_dir_path, TAGS_ATTRIBUTE, DESCRIPTION_ATTRIBUTE, COMMAND_ATTRIBUTE, NAME_ATTRIBUTE, \
+from manager_config import data_dir_path
+from util.constants import TAGS_ATTRIBUTE, DESCRIPTION_ATTRIBUTE, COMMAND_ATTRIBUTE, NAME_ATTRIBUTE, \
     ALIAS_ATTRIBUTES_DEFAULTS, SET_NAME_ATTRIBUTE, IS_ACTIVE_ATTRIBUTE
 from util.helpers.files_helpers import path_exists, is_file
 from util.helpers.filters import remove_non_valid_aliases, handle_conflict, change_name_handler, \
@@ -11,7 +12,7 @@ from util.helpers.read_helpers import load_json_from_file
 
 def generate_aliases_source(args):
     """
-        generate a source file from aliases sets
+    generate a source file from aliases sets
     """
     set_names = args.set_name
     generate_all = args.all
@@ -32,7 +33,7 @@ def generate_aliases_source(args):
             all_aliases = []
             for set_name in set_names:
                 try:
-                    aliases_set = load_json_from_file(set_name, data_dir_path)
+                    aliases_set = load_json_from_file(set_name, data_dir_path())
                     for alias in aliases_set:
                         temp = {}
                         for attribute in ALIAS_ATTRIBUTES_DEFAULTS.keys():
@@ -64,7 +65,7 @@ def generate_aliases_source(args):
         for name in set_names:
             try:
                 destination_file = destination + name
-                aliases = load_json_from_file(name, data_dir_path)
+                aliases = load_json_from_file(name, data_dir_path())
 
                 if path_exists(destination_file) and overwrite is not True:
                     raise Exception("file already exits in destination")

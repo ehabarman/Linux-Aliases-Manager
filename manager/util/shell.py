@@ -2,7 +2,9 @@ import subprocess
 
 
 def execute_shell_command(command):
-    """Executes a shell command"""
+    """
+    Executes a shell command
+    """
     process = subprocess.Popen([command], stdout=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True,
                                shell=True)
     stdout, stderr = process.communicate()
@@ -10,7 +12,9 @@ def execute_shell_command(command):
 
 
 def execute_shell_commands(commands, continue_on_failure=False):
-    """Executes multiple shell commands with the option to continue execution if one of them failed"""
+    """
+    Executes multiple shell commands with the option to continue execution if one of them failed
+    """
     output = []
     error = []
     return_code = []

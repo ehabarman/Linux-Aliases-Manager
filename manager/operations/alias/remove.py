@@ -1,6 +1,7 @@
 import sys
 
-from util.constants import data_dir_path, NAME_ATTRIBUTE, ALIAS_COLUMNS
+from manager_config import data_dir_path
+from util.constants import NAME_ATTRIBUTE, ALIAS_COLUMNS
 from util.helpers.files_helpers import path_exists
 from util.helpers.print_helpers import print_json_in_file, print_table_in_console
 from util.helpers.read_helpers import load_json_from_file
@@ -8,7 +9,7 @@ from util.helpers.read_helpers import load_json_from_file
 
 def remove_aliases(args):
     """
-        remove aliases from a set
+    remove aliases from a set
     """
 
     aliases_names = args.name
@@ -16,9 +17,9 @@ def remove_aliases(args):
     set_name = args.set_name
 
     try:
-        if path_exists(data_dir_path + set_name) is False:
+        if path_exists(data_dir_path() + set_name) is False:
             raise Exception("'{}' set does not exist".format(set_name))
-        set_aliases = load_json_from_file(set_name, data_dir_path)
+        set_aliases = load_json_from_file(set_name, data_dir_path())
 
         set_names_list = [alias[NAME_ATTRIBUTE] for alias in set_aliases]
 
@@ -45,7 +46,7 @@ def remove_aliases(args):
 
         if confirmation is True:
             remaining_aliases = list(filter(lambda alias: alias[NAME_ATTRIBUTE] not in found_aliases, set_aliases))
-            print_json_in_file(remaining_aliases, ALIAS_COLUMNS, data_dir_path + set_name)
+            print_json_in_file(remaining_aliases, ALIAS_COLUMNS, data_dir_path() + set_name)
             print_table_in_console(remaining_aliases, ALIAS_COLUMNS)
 
     except Exception as e:

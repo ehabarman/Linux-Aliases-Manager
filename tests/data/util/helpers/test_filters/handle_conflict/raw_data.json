@@ -1,0 +1,23 @@
+[
+  {
+    "command": "cmd1",
+    "name": "name1",
+    "set_name": "set1"
+  },
+  {
+    "command": "cmd2",
+    "name": "name2",
+    "set_name": "set2"
+  },
+  {
+    "command": "cmd2",
+    "name": "name2",
+    "set_name": "set3"
+  }
+  ,
+  {
+    "command": "cmd2",
+    "name": "name2",
+    "set_name": "set4"
+  }
+]
